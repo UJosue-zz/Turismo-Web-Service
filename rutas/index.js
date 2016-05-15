@@ -6,6 +6,7 @@ module.exports=(function(modelo){
     var rol=require('../controller/ControladorRol.js')(modelo);
     var departamento=require('../controller/ControladorDepartamento.js')(modelo);
     var categoria=require('../controller/ControladorCategoria.js')(modelo);
+    var sitio=require('../controller/ControladorSitio.js')(modelo);
 
     ruta.get('/',function(peticion,respuesta){
         respuesta.send("Servicio iniciado");
@@ -37,6 +38,17 @@ module.exports=(function(modelo){
     ruta.delete('/categoria/:id', categoria.eliminar);
     ruta.put('/categoria/:id',categoria.editar);
     ruta.get('/categoria/:id',categoria.listarId);
+
+    /*
+     Rutas para Sitio
+     */
+    ruta.get('/sitio', sitio.listar);
+    ruta.post('/sitio', sitio.crear);
+    ruta.delete('/sitio/:id', sitio.eliminar);
+    ruta.put('/sitio/:id',sitio.editar);
+    ruta.get('/sitio/:id',sitio.listarId);
+    ruta.get('/sitio/:nombre',sitio.listarNombre);
+    ruta.get('/sitio/:categoria',sitio.listarCategoria);
 
     return ruta;
 });
