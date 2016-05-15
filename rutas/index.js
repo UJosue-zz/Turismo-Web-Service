@@ -5,6 +5,7 @@ var ruta=require('express').Router();
 module.exports=(function(modelo){
     var rol=require('../controller/ControladorRol.js')(modelo);
     var departamento=require('../controller/ControladorDepartamento.js')(modelo);
+    var categoria=require('../controller/ControladorCategoria.js')(modelo);
 
     ruta.get('/',function(peticion,respuesta){
         respuesta.send("Servicio iniciado");
@@ -27,6 +28,15 @@ module.exports=(function(modelo){
     ruta.delete('/departamento/:id', departamento.eliminar);
     ruta.put('/departamento/:id',departamento.editar);
     ruta.get('/departamento/:id',departamento.listarId);
+
+    /*
+     Rutas para Categoria
+     */
+    ruta.get('/categoria', categoria.listar);
+    ruta.post('/categoria', categoria.crear);
+    ruta.delete('/categoria/:id', categoria.eliminar);
+    ruta.put('/categoria/:id',categoria.editar);
+    ruta.get('/categoria/:id',categoria.listarId);
 
     return ruta;
 });

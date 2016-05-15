@@ -1,0 +1,9 @@
+DELIMITER $$
+
+CREATE
+    PROCEDURE `db_turismo`.`editar_Departamento`(IN _nombre VARCHAR(255), IN _nota VARCHAR(255), IN _id INT)
+    BEGIN
+	UPDATE Departamento SET Departamento.`nombre` = _nombre, Departamento.`nota` = _nota WHERE Departamento.`id_Departamento` = _id;
+    END$$
+
+DELIMITER ;
