@@ -1,15 +1,15 @@
 /**
  * Created by HP240 on 15/05/2016.
  */
-module.exports=function(modelo){
-    return {
+module.exports = function (modelo) {
+    return{
         listar:function(peticion,respuesta){
-            modelo.rol.findAll().then(function(data){
+            modelo.departamento.findAll().then(function(data){
                 respuesta.json(data);
             });
         },
-        crear:function(peticion,respuesta){
-            modelo.sequelize.query("CALL crear_Rol('"+peticion.body.nombre+"','"+peticion.body.nota+"');")
+        crear: function(peticion,respuesta) {
+            modelo.sequelize.query("CALL crear_Departamento('"+peticion.body.nombre+"','"+peticion.body.nota+"');")
                 .then(function(){
                     respuesta.send({"mensaje":"Registro insertado correctamente","status":"200"});
                 }).error(function(err){
@@ -17,26 +17,26 @@ module.exports=function(modelo){
             });
         },
         eliminar:function (peticion,respuesta) {
-            modelo.rol.destroy({
+            modelo.departamento.destroy({
                 where:{
-                    id_Rol: peticion.params.id
+                    id_Departamento: peticion.params.id
                 }
             }).then(function(){
-                respuesta.json({"mensaje":"Rol eliminado"});
+                respuesta.json({"mensaje":"Departamento eliminado"});
             }).error(function(){
                 throw err;
             });
         },
         editar:function (peticion,respuesta) {
-            modelo.sequelize.query("CALL editar_Rol('"+peticion.body.nombre+"','"+peticion.body.nota+"','"+peticion.params.id+"');")
+            modelo.sequelize.query("CALL editar_Departamento('"+peticion.body.nombre+"','"+peticion.body.nota+"','"+peticion.params.id+"');")
                 .then(function () {
-                    respuesta.send({"mensaje":"Rol editado correctamente","status":"200"});
+                    respuesta.send({"mensaje":"Departamento editado correctamente","status":"200"});
                 }).error(function (err) {
                 respuesta.send({"mensaje":"Error "+err,"status":"500"});
             });
         },
         listarId:function (peticion,respuesta) {
-            modelo.rol.findById(peticion.params.id).then(function (data) {
+            modelo.departamento.findById(peticion.params.id).then(function (data) {
                 respuesta.json(data);
             });
         }
